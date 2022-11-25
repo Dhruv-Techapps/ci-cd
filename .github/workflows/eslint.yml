@@ -7,6 +7,16 @@ jobs:
   eslint:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup node env
+        uses: actions/setup-node@v3
+        with:
+          always-auth: true
+          node-version: 16
+          registry-url: https://npm.pkg.github.com
+          scope: "@dhruv-techapps"
+          cache: "npm"
       - name: Install ESLint
         run: |
           npm install eslint@8.10.0
