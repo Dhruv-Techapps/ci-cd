@@ -7,7 +7,7 @@ jobs:
   eslint:
     runs-on: ubuntu-latest
     steps:
-      - name: install ESLint
+      - name: Install ESLint
         run: |
           npm install eslint@8.10.0
           npm install @microsoft/eslint-formatter-sarif@2.1.7
