@@ -5,6 +5,11 @@ on:
 
 jobs:
   eslint:
+    permissions:
+      contents: read
+      security-events: write
+      packages: read
+      actions: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
