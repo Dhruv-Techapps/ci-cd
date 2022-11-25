@@ -5,19 +5,15 @@ on:
 
 jobs:
   checkout:
-    name: Checkout
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      
-    setup:
-      needs: checkout
-      name: Setup node env
-      setps:
-        - uses: actions/setup-node@v3
-        - with:
-            always-auth: true
-            node-version: 16
-            registry-url: https://npm.pkg.github.com
-            scope: "@dhruv-techapps"
-            cache: "npm"
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup node env
+        uses: actions/setup-node@v3
+        with:
+          always-auth: true
+          node-version: 16
+          registry-url: https://npm.pkg.github.com
+          scope: "@dhruv-techapps"
+          cache: "npm"
