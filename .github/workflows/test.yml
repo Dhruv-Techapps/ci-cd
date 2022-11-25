@@ -4,16 +4,18 @@ on:
   workflow_call:
 
 jobs:
-  checkout-and-setup:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup node env
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           always-auth: true
           node-version: 16
           registry-url: https://npm.pkg.github.com
           scope: "@dhruv-techapps"
           cache: "npm"
+      - run: npm ci
+      - run: npm test
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
