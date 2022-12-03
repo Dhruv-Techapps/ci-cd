@@ -1,4 +1,4 @@
-name: Checkout And Setup
+name: Test
 
 on:
   workflow_call:
