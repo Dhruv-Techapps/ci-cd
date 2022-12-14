@@ -16,6 +16,6 @@ jobs:
           scope: "@dhruv-techapps"
           cache: "npm"
       - run: npm ci
-      - run: npm test
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - run: npm test
