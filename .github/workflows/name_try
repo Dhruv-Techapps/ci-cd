@@ -1,0 +1,15 @@
+name: Build Extension
+
+on:
+  workflow_dispatch:
+  
+env:
+    NAME: Auto Clicker - AutoFill [DEV]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      run: |
+        echo "$NAME"
