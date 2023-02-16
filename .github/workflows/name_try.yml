@@ -13,8 +13,8 @@ jobs:
     - name: Name
       id: name
       run: |
-        echo "NAME=${NAME,,}" >>${NAME}
-        echo "NAME=${NAME//[^[:alnum:]]/_}" >>${NAME}
+        echo "NAME=${NAME,,}" >>${GITHUB_ENV}
+        echo "NAME=${NAME//[^[:alnum:]]/_}" >>${GITHUB_ENV}
 
     - name: TEST
       run: |
