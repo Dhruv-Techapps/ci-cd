@@ -15,7 +15,8 @@ jobs:
       run: |
         echo "NAME=${NAME,,}" >>${GITHUB_ENV}
         echo "NAME=${NAME//[^[:alnum:]]/_}" >>${GITHUB_ENV}
+        echo "${NAME}"
 
     - name: TEST
       run: |
-        echo "${steps.name.NAME}"
+        echo "${NAME}"
