@@ -12,4 +12,5 @@ jobs:
     steps:
     - name: Checkout Code
       run: |
-        echo "$NAME"
+        echo "NAME=${NAME,,}"
+        echo "NAME=${NAME//[^[:alnum:]]/_}"
