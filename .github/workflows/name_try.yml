@@ -10,7 +10,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Code
+    - name: Name
+      id: name
       run: |
-        echo "NAME=${NAME,,}"
-        echo "NAME=${NAME//[^[:alnum:]]/_}"
+        echo "NAME=${NAME,,}" >>${NAME}
+        echo "NAME=${NAME//[^[:alnum:]]/_}" >>${NAME}
+
+    - name: TEST
+      run: |
+        echo "${steps.name.NAME}"
