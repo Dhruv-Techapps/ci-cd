@@ -2,21 +2,21 @@ name: Build Extension
 
 on:
   workflow_dispatch:
-  
-env:
-    NAME: Auto Clicker - AutoFill [DEV]
+    inputs:
+      environment:
+        description: 'Environment of release'
+        type: environment
+        default: Development
+        required: true
+  pull_request:
     
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: 
+      name: ${{inputs.environment || inputs.environment.default}}
     steps:
     - name: Name
       id: name
       run: |
-        echo "NAME=${NAME,,}" >>${GITHUB_ENV}
-        echo "NAME=${NAME//[^[:alnum:]]/_}" >>${GITHUB_ENV}
-        echo "${NAME}"
-
-    - name: TEST
-      run: |
-        echo "${NAME}"
+        echo "${vars.NAME}"
