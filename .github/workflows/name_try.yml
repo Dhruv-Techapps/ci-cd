@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment: 
-      name: ${{inputs.environment || Beta}}
+      name: ${{inputs.environment || "Beta"}}
     steps:
     - name: Name
       id: name
