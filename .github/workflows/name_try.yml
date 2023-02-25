@@ -19,4 +19,4 @@ jobs:
     - name: Name
       id: name
       run: |
-        echo "${vars.NAME}"
+        echo "${{vars.NAME}}"
