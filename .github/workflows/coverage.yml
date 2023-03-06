@@ -15,12 +15,12 @@ jobs:
                 registry-url: https://npm.pkg.github.com
                 scope: "@dhruv-techapps"
                 cache: "npm"
-            - uses: ArtiomTr/jest-coverage-report-action@v2
-              id: coverage
+            - run: npm ci
               env:
                 NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-              with:
-                  output: report-markdown
-            - uses: marocchino/sticky-pull-request-comment@v2
-              with:
-                  message: ${{ steps.coverage.outputs.report }}
+            - run: npm test --coverage
+            - name: SonarCloud Scan
+                uses: SonarSource/sonarcloud-github-action@master
+                env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
