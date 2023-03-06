@@ -1,0 +1,22 @@
+name: Build Extension
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment of release'
+        type: environment
+        default: Development
+        required: true
+  pull_request:
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: 
+      name: ${{inputs.environment || inputs.environment.default}}
+    steps:
+    - name: Name
+      id: name
+      run: |
+        echo "${{vars.NAME}}"
