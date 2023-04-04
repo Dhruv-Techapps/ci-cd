@@ -2,28 +2,25 @@ name: Coverage
 
 on:
   workflow_call:
-    secrets:
-      SONARCLOUD_TOKEN:
-        required: true
 
 jobs:
-  coverage:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          always-auth: true
-          node-version: 16
-          registry-url: https://npm.pkg.github.com
-          scope: "@dhruv-techapps"
-          cache: "npm"
-      - run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - run: npm run test:coverage
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+    coverage:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                always-auth: true
+                node-version: 16
+                registry-url: https://npm.pkg.github.com
+                scope: "@dhruv-techapps"
+                cache: "npm"
+            - uses: ArtiomTr/jest-coverage-report-action@v2
+              id: coverage
+              env:
+                NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+              with:
+                  output: report-markdown
+            - uses: marocchino/sticky-pull-request-comment@v2
+              with:
+                  message: ${{ steps.coverage.outputs.report }}
