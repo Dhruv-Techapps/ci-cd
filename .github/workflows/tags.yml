@@ -1,0 +1,21 @@
+on:
+  push:
+    tags:
+      - "*"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    outputs:
+      #version
+      RELEASE_VERSION: ${{ steps.set-output-defaults.outputs.RELEASE_VERSION}}
+    steps:
+      - name: Set env
+        id: set-output-defaults
+        run: |
+          echo "RELEASE_VERSION=${{github.ref_name}}" >> $GITHUB_OUTPUT
+  main:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "${{needs.test.outputs.RELEASE_VERSION}}"
