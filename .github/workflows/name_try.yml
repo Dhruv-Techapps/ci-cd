@@ -10,13 +10,25 @@ on:
         required: true
     
 jobs:
-  build:
+  EnvSetup:
+    name: Setup
     runs-on: ubuntu-latest
-    environment: 
-      name: ${{inputs.environment || inputs.environment.default}}
+    environment: ${{inputs.environment}}
+    outputs:
+      NX_NAME: ${{ steps.set-output-defaults.outputs.NX_NAME}}
+    steps:
+      - name: set outputs with default values
+        id: set-output-defaults
+        run: |
+          echo "NX_NAME=${{ vars.NAME }}" >> $GITHUB_OUTPUT
+        
+          
+  build:
+    needs: [EnvSetup]
+    runs-on: ubuntu-latest
     steps:
     - name: Name
       id: name
       run: |
-        echo "${{ 'DEV' == 'DEV' }}"
-        echo "${{vars.NAME}}"
+        echo "${{ needs.EnvSetup.outputs.NX_NAME == 'DEV' }}"
+        echo "${{needs.EnvSetup.outputs.NX_NAME}}"
