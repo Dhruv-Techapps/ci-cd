@@ -18,4 +18,5 @@ jobs:
     - name: Name
       id: name
       run: |
+        echo "${{ 'DEV' == 'DEV' }}"
         echo "${{vars.NAME}}"
